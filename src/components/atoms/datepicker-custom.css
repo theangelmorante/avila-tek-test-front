@@ -1,5 +1,5 @@
 .custom-datepicker-calendar {
-  background: #448AFF !important;
+  background: #015c30 !important;
   color: #fff !important;
   border-radius: 1rem !important;
   border: none !important;
@@ -7,7 +7,7 @@
 }
 
 .custom-datepicker-calendar .react-datepicker__header {
-  background: #448AFF !important;
+  background: #015c30 !important;
   border-bottom: none !important;
   color: #fff !important;
   border-radius: 1rem 1rem 0 0 !important;
@@ -41,7 +41,7 @@
 }
 
 .react-datepicker__year-dropdown {
-  background: #448AFF;
+  background: #015c30;
   border-radius: 1rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   border: 1px solid #1976D2;
@@ -63,6 +63,6 @@
   background: #1976D2;
 }
 .react-datepicker__year-dropdown::-webkit-scrollbar-thumb {
-  background: #448AFF;
+  background: #015c30;
   border-radius: 8px;
 } 

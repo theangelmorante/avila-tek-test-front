@@ -27,10 +27,10 @@ const TravelersForm: React.FC = () => {
     <form className="flex flex-col gap-6 w-full max-w-xl mx-auto p-0" autoComplete="off">
       <div className="flex flex-col md:flex-row gap-4 items-center">
         <label className="text-white font-semibold text-lg mr-4">Número de viajeros</label>
-        <div className="flex items-center bg-[#448AFF] rounded-2xl px-2 py-1 shadow-sm">
+        <div className="flex items-center bg-[#015c30] rounded-2xl px-2 py-1 shadow-sm">
           <button
             type="button"
-            className="text-white text-2xl px-3 py-1 focus:outline-none disabled:opacity-30"
+            className="text-white text-2xl px-3 py-1 focus:outline-none disabled:opacity-30 cursor-pointer"
             onClick={() => handleNumTravelersChange(Math.max(MIN_TRAVELERS, numTravelers - 1))}
             disabled={numTravelers <= MIN_TRAVELERS}
             aria-label="Disminuir viajeros"
@@ -40,7 +40,7 @@ const TravelersForm: React.FC = () => {
           <span className="text-white text-lg font-bold w-8 text-center select-none">{numTravelers}</span>
           <button
             type="button"
-            className="text-white text-2xl px-3 py-1 focus:outline-none disabled:opacity-30"
+            className="text-white text-2xl px-3 py-1 focus:outline-none disabled:opacity-30 cursor-pointer"
             onClick={() => handleNumTravelersChange(Math.min(MAX_TRAVELERS, numTravelers + 1))}
             disabled={numTravelers >= MAX_TRAVELERS}
             aria-label="Aumentar viajeros"

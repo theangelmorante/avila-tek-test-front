@@ -9,8 +9,8 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#303F9F", // azul principal
-          light: "#448AFF",
+          DEFAULT: "#03230d",
+          light: "#015c30",
           dark: "#1e40af",
           button: "#212121",
         },
