@@ -1,71 +1,68 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useFormContext, Controller } from 'react-hook-form';
 import Switch from '../atoms/Switch';
 import Textarea from '../atoms/Textarea';
-
-export interface AdditionalServicesFormData {
-  travelInsurance: boolean;
-  preferentialSeats: boolean;
-  specialAssistance: boolean;
-  assistanceNote: string;
-}
-
-interface AdditionalServicesFormProps {
-  onSubmit: (data: AdditionalServicesFormData) => void;
-  initialValues?: AdditionalServicesFormData | null;
-}
+import { AdditionalServicesFormData } from '../../types';
 
 const MAX_NOTE_LENGTH = 200;
 
-const AdditionalServicesForm: React.FC<AdditionalServicesFormProps> = ({ onSubmit, initialValues }) => {
-  const [travelInsurance, setTravelInsurance] = useState(initialValues?.travelInsurance ?? false);
-  const [preferentialSeats, setPreferentialSeats] = useState(initialValues?.preferentialSeats ?? false);
-  const [specialAssistance, setSpecialAssistance] = useState(initialValues?.specialAssistance ?? false);
-  const [assistanceNote, setAssistanceNote] = useState(initialValues?.assistanceNote ?? '');
-  const [touched, setTouched] = useState(false);
-
-  const isNoteValid = !specialAssistance || (assistanceNote.trim().length > 0 && assistanceNote.length <= MAX_NOTE_LENGTH);
-  const isValid = isNoteValid;
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setTouched(true);
-    if (!isValid) return;
-    onSubmit({
-      travelInsurance,
-      preferentialSeats,
-      specialAssistance,
-      assistanceNote: specialAssistance ? assistanceNote.trim() : '',
-    });
-  };
+const AdditionalServicesForm: React.FC = () => {
+  const { control, watch, formState: { errors } } = useFormContext<{ additionalServices: AdditionalServicesFormData }>();
+  const specialAssistance = watch('additionalServices.specialAssistance');
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full max-w-xl mx-auto p-0">
-      <Switch
-        label="¿Deseas agregar seguro de viaje?"
-        checked={travelInsurance}
-        onChange={e => setTravelInsurance(e.target.checked)}
+    <form className="flex flex-col gap-6 w-full max-w-xl mx-auto p-0" autoComplete="off">
+      <Controller
+        name="additionalServices.travelInsurance"
+        control={control}
+        render={({ field }) => (
+          <Switch
+            label="¿Deseas agregar seguro de viaje?"
+            checked={!!field.value}
+            onChange={e => field.onChange(e.target.checked)}
+          />
+        )}
       />
-      <Switch
-        label="¿Deseas seleccionar asientos preferenciales?"
-        checked={preferentialSeats}
-        onChange={e => setPreferentialSeats(e.target.checked)}
+      <Controller
+        name="additionalServices.preferentialSeats"
+        control={control}
+        render={({ field }) => (
+          <Switch
+            label="¿Deseas seleccionar asientos preferenciales?"
+            checked={!!field.value}
+            onChange={e => field.onChange(e.target.checked)}
+          />
+        )}
       />
-      <Switch
-        label="¿Requiere asistencia especial?"
-        checked={specialAssistance}
-        onChange={e => setSpecialAssistance(e.target.checked)}
+      <Controller
+        name="additionalServices.specialAssistance"
+        control={control}
+        render={({ field }) => (
+          <Switch
+            label="¿Requiere asistencia especial?"
+            checked={!!field.value}
+            onChange={e => field.onChange(e.target.checked)}
+          />
+        )}
       />
       {specialAssistance && (
-        <Textarea
-          label="Describe brevemente la asistencia requerida (máx. 200 caracteres)"
-          value={assistanceNote}
-          onChange={e => setAssistanceNote(e.target.value.slice(0, MAX_NOTE_LENGTH))}
-          maxLength={MAX_NOTE_LENGTH}
-          required
-          placeholder="Ej: Silla de ruedas, ayuda visual, etc."
+        <Controller
+          name="additionalServices.assistanceNote"
+          control={control}
+          rules={{ required: specialAssistance, maxLength: MAX_NOTE_LENGTH }}
+          render={({ field }) => (
+            <Textarea
+              label="Describe brevemente la asistencia requerida (máx. 200 caracteres)"
+              value={field.value || ''}
+              onChange={e => field.onChange(e.target.value.slice(0, MAX_NOTE_LENGTH))}
+              maxLength={MAX_NOTE_LENGTH}
+              required
+              placeholder="Ej: Silla de ruedas, ayuda visual, etc."
+            />
+          )}
         />
       )}
-      {touched && !isNoteValid && (
+      {errors.additionalServices?.assistanceNote && (
         <div className="text-red-200 text-sm">Por favor, escribe una nota de asistencia (máx. 200 caracteres).</div>
       )}
     </form>

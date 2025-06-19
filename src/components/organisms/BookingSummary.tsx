@@ -1,16 +1,17 @@
 import React from 'react';
-import { TravelInfoFormData } from './TravelInfoForm';
-import { TravelersFormData } from './TravelersForm';
-import { AdditionalServicesFormData } from './AdditionalServicesForm';
+import { useFormContext } from 'react-hook-form';
+import { TravelInfoFormData, TravelersFormData, AdditionalServicesFormData } from '../../types';
 
 interface BookingSummaryProps {
-  travelInfo: TravelInfoFormData;
-  travelersInfo: TravelersFormData;
-  additionalServices: AdditionalServicesFormData;
   confirmed: boolean;
 }
 
-const BookingSummary: React.FC<BookingSummaryProps> = ({ travelInfo, travelersInfo, additionalServices, confirmed }) => {
+const BookingSummary: React.FC<BookingSummaryProps> = ({ confirmed }) => {
+  const { watch } = useFormContext();
+  const travelInfo = watch('travelInfo') as TravelInfoFormData;
+  const travelersInfo = watch('travelersInfo') as TravelersFormData;
+  const additionalServices = watch('additionalServices') as AdditionalServicesFormData;
+
   if (confirmed) {
     return (
       <div className="flex flex-col items-center justify-center gap-6 py-12">
@@ -20,15 +21,19 @@ const BookingSummary: React.FC<BookingSummaryProps> = ({ travelInfo, travelersIn
     );
   }
 
+  if (!travelInfo || !travelersInfo || !additionalServices) {
+    return <div className="text-white text-center py-12">Por favor, completa los pasos anteriores para ver el resumen de tu reserva.</div>;
+  }
+
   return (
     <div className="flex flex-col gap-6 w-full max-w-xl mx-auto p-0">
       <h2 className="text-xl font-bold text-white mb-2">Resumen de tu reserva</h2>
       <div className="bg-white/10 rounded-2xl p-4 text-white text-base flex flex-col gap-2">
-        <div><span className="font-semibold">Destino:</span> {travelInfo.destination.label}</div>
-        <div><span className="font-semibold">Fechas:</span> {travelInfo.departureDate.toLocaleDateString()} - {travelInfo.returnDate.toLocaleDateString()}</div>
-        <div><span className="font-semibold">Clase de vuelo:</span> {travelInfo.flightClass.label}</div>
-        <div><span className="font-semibold">Viajeros:</span> {travelersInfo.travelers.length} (
-          {travelersInfo.travelers.map((t, i) => (
+        <div><span className="font-semibold">Destino:</span> {travelInfo.destination?.label}</div>
+        <div><span className="font-semibold">Fechas:</span> {travelInfo.departureDate ? new Date(travelInfo.departureDate).toLocaleDateString() : ''} - {travelInfo.returnDate ? new Date(travelInfo.returnDate).toLocaleDateString() : ''}</div>
+        <div><span className="font-semibold">Clase de vuelo:</span> {travelInfo.flightClass?.label}</div>
+        <div><span className="font-semibold">Viajeros:</span> {travelersInfo.travelers?.length} (
+          {travelersInfo.travelers?.map((t: typeof travelersInfo.travelers[0], i: number) => (
             <span key={i}>{t.birthDate ? `${Math.floor((new Date().getTime() - new Date(t.birthDate).getTime()) / (1000 * 60 * 60 * 24 * 365.25))} años` : 'Edad no especificada'}{i < travelersInfo.travelers.length - 1 ? ', ' : ''}</span>
           ))}
           )</div>
