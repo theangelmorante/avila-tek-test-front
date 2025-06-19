@@ -4,9 +4,11 @@ import FlightClassSelect from '../molecules/FlightClassSelect';
 import DateRangeFields from '../molecules/DateRangeFields';
 import Button from '../atoms/Button';
 import { Option } from '../atoms/Select';
+import { useWizard } from 'react-use-wizard';
 
 interface TravelInfoFormProps {
   onSubmit: (data: TravelInfoFormData) => void;
+  initialValues?: TravelInfoFormData | null;
 }
 
 export interface TravelInfoFormData {
@@ -16,11 +18,12 @@ export interface TravelInfoFormData {
   flightClass: Option;
 }
 
-const TravelInfoForm: React.FC<TravelInfoFormProps> = ({ onSubmit }) => {
-  const [destination, setDestination] = useState<Option | null>(null);
-  const [flightClass, setFlightClass] = useState<Option | null>(null);
-  const [departureDate, setDepartureDate] = useState<Date | null>(null);
-  const [returnDate, setReturnDate] = useState<Date | null>(null);
+const TravelInfoForm: React.FC<TravelInfoFormProps> = ({ onSubmit, initialValues }) => {
+  const { goToStep } = useWizard();
+  const [destination, setDestination] = useState<Option | null>(initialValues?.destination ?? null);
+  const [flightClass, setFlightClass] = useState<Option | null>(initialValues?.flightClass ?? null);
+  const [departureDate, setDepartureDate] = useState<Date | null>(initialValues?.departureDate ?? null);
+  const [returnDate, setReturnDate] = useState<Date | null>(initialValues?.returnDate ?? null);
   const [touched, setTouched] = useState(false);
 
   const isValid =
@@ -49,6 +52,7 @@ const TravelInfoForm: React.FC<TravelInfoFormProps> = ({ onSubmit }) => {
       returnDate: returnDate!,
       flightClass: flightClass!,
     });
+    goToStep(1)
   };
 
   return (

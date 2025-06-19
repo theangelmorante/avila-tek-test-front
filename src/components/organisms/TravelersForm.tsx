@@ -18,6 +18,7 @@ export interface TravelersFormData {
 
 interface TravelersFormProps {
   onSubmit: (data: TravelersFormData) => void;
+  initialValues?: TravelersFormData | null;
 }
 
 const MAX_TRAVELERS = 10;
@@ -27,15 +28,15 @@ type TravelerField = 'name' | 'birthDate' | 'documentType' | 'documentNumber';
 
 type TravelerFieldValue = string | Date | { value: string; label: string } | null;
 
-const TravelersForm: React.FC<TravelersFormProps> = ({ onSubmit }) => {
-  const [numTravelers, setNumTravelers] = useState(1);
-  const [travelers, setTravelers] = useState<Traveler[]>([
+const TravelersForm: React.FC<TravelersFormProps> = ({ onSubmit, initialValues }) => {
+  const [numTravelers, setNumTravelers] = useState(initialValues?.travelers?.length ?? 1);
+  const [travelers, setTravelers] = useState<Traveler[]>(initialValues?.travelers ?? [
     { name: '', birthDate: null, documentType: null, documentNumber: '' },
   ]);
-  const [hasPets, setHasPets] = useState(false);
-  const [pets, setPets] = useState(0);
-  const [hasBags, setHasBags] = useState(false);
-  const [extraBags, setExtraBags] = useState(0);
+  const [hasPets, setHasPets] = useState((initialValues?.pets ?? 0) > 0);
+  const [pets, setPets] = useState(initialValues?.pets ?? 0);
+  const [hasBags, setHasBags] = useState((initialValues?.extraBags ?? 0) > 0);
+  const [extraBags, setExtraBags] = useState(initialValues?.extraBags ?? 0);
   const [touched, setTouched] = useState(false);
 
   // Sin validación profunda para simplificar
@@ -62,6 +63,12 @@ const TravelersForm: React.FC<TravelersFormProps> = ({ onSubmit }) => {
     });
   };
 
+  // Añadir función auxiliar para cambiar el número de viajeros sin usar 'any'
+  const changeNumTravelers = (newValue: number) => {
+    const event = { target: { value: newValue.toString() } } as React.ChangeEvent<HTMLInputElement>;
+    handleNumTravelersChange(event);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
@@ -72,27 +79,42 @@ const TravelersForm: React.FC<TravelersFormProps> = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full max-w-xl mx-auto p-0">
       <div className="flex flex-col md:flex-row gap-4 items-center">
-        <Input
-          label="Número de viajeros"
-          type="number"
-          min={MIN_TRAVELERS}
-          max={MAX_TRAVELERS}
-          value={numTravelers}
-          onChange={handleNumTravelersChange}
-          className="w-40"
-        />
+        <label className="text-white font-semibold text-lg mr-4">Número de viajeros</label>
+        <div className="flex items-center bg-[#448AFF] rounded-2xl px-2 py-1 shadow-sm">
+          <button
+            type="button"
+            className="text-white text-2xl px-3 py-1 focus:outline-none disabled:opacity-30"
+            onClick={() => changeNumTravelers(numTravelers - 1)}
+            disabled={numTravelers <= MIN_TRAVELERS}
+            aria-label="Disminuir viajeros"
+          >
+            -
+          </button>
+          <span className="text-white text-lg font-bold w-8 text-center select-none">{numTravelers}</span>
+          <button
+            type="button"
+            className="text-white text-2xl px-3 py-1 focus:outline-none disabled:opacity-30"
+            onClick={() => changeNumTravelers(numTravelers + 1)}
+            disabled={numTravelers >= MAX_TRAVELERS}
+            aria-label="Aumentar viajeros"
+          >
+            +
+          </button>
+        </div>
       </div>
-      {travelers.map((t, idx) => (
-        <TravelerFields
-          key={idx}
-          index={idx}
-          name={t.name}
-          birthDate={t.birthDate}
-          documentType={t.documentType}
-          documentNumber={t.documentNumber}
-          onChange={(field, value) => handleTravelerChange(idx, field as TravelerField, value as TravelerFieldValue)}
-        />
-      ))}
+      <div className="max-h-[350px] overflow-y-auto pr-2 flex flex-col gap-4">
+        {travelers.map((t, idx) => (
+          <TravelerFields
+            key={idx}
+            index={idx}
+            name={t.name}
+            birthDate={t.birthDate}
+            documentType={t.documentType}
+            documentNumber={t.documentNumber}
+            onChange={(field, value) => handleTravelerChange(idx, field as TravelerField, value as TravelerFieldValue)}
+          />
+        ))}
+      </div>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="flex items-center gap-2">
           <span className="text-white font-semibold">¿Viajas con mascotas?</span>
