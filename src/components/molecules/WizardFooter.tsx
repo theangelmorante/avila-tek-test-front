@@ -20,7 +20,7 @@ const WizardFooter: React.FC<WizardFooterProps> = ({ onFinish, isStepValid, book
           type="button"
           onClick={() => {
             goToStep(0);
-            onNewBooking && onNewBooking();
+            if (onNewBooking) onNewBooking();
           }}
           className="bg-primary text-white font-bold py-3 px-8 rounded-2xl shadow-md hover:bg-primary/80 transition-all"
         >

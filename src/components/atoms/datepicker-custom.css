@@ -38,4 +38,31 @@
 .custom-datepicker-calendar .react-datepicker__day:hover {
   background: #1565C0 !important;
   color: #fff !important;
+}
+
+.react-datepicker__year-dropdown {
+  background: #448AFF;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #1976D2;
+}
+.react-datepicker__year-option {
+  color: #fff;
+  background: transparent;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.react-datepicker__year-option:hover,
+.react-datepicker__year-option--selected {
+  background: #1976D2;
+  color: #fff;
+}
+.react-datepicker__year-dropdown::-webkit-scrollbar {
+  width: 8px;
+  background: #1976D2;
+}
+.react-datepicker__year-dropdown::-webkit-scrollbar-thumb {
+  background: #448AFF;
+  border-radius: 8px;
 } 
