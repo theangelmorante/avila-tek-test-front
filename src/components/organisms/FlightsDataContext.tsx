@@ -1,3 +1,4 @@
+'use client'
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
 const DATA_URL = 'https://raw.githubusercontent.com/Lstanislao/cities-permalink/main/flights.json';

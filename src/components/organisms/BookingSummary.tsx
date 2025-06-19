@@ -14,7 +14,6 @@ const BookingSummary: React.FC<BookingSummaryProps> = ({ confirmed }) => {
   const additionalServices = watch('additionalServices') as AdditionalServicesFormData;
   const { data } = useFlightsData();
 
-  // Calcular precio base
   let basePrice = 0;
   if (data && travelInfo?.destination && travelInfo?.flightClass) {
     const found = data.find(
@@ -23,7 +22,6 @@ const BookingSummary: React.FC<BookingSummaryProps> = ({ confirmed }) => {
     basePrice = found?.priceUSD || 0;
   }
 
-  // Calcular servicios adicionales
   const petsCost = (travelersInfo?.pets || 0) * 100;
   const bagsCost = (travelersInfo?.extraBags || 0) * 50;
   const insuranceCost = additionalServices?.travelInsurance ? 200 : 0;

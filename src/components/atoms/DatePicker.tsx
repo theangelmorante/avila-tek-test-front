@@ -14,7 +14,6 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, ...props }) => (
     <ReactDatePicker
       className="px-5 py-3 border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-primary transition-all text-lg placeholder-white w-full bg-[#015c30] text-white"
       calendarClassName="custom-datepicker-calendar"
-      // dayClassName={date => 'custom-datepicker-day'}
       dateFormat="dd/MM/yyyy"
       showYearDropdown
       scrollableYearDropdown
