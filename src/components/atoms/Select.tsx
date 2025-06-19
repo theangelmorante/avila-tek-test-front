@@ -26,7 +26,7 @@ const customStyles: StylesConfig<Option, false, GroupBase<Option>> = {
   control: (provided: CSSObjectWithLabel) => ({
     ...provided,
     borderRadius: "1rem",
-    backgroundColor: "#448AFF",
+    backgroundColor: "#015c30",
     boxShadow: "0 1px 4px #0001",
     minHeight: "3.25rem",
     paddingLeft: "0.5rem",
@@ -46,7 +46,7 @@ const customStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     ...provided,
     borderRadius: "1rem",
     fontSize: "1.125rem",
-    backgroundColor: "#448AFF",
+    backgroundColor: "#015c30",
     color: "white",
   }),
   option: (provided: CSSObjectWithLabel, state) => ({
@@ -55,7 +55,7 @@ const customStyles: StylesConfig<Option, false, GroupBase<Option>> = {
       ? "#1976D2"
       : state.isFocused
         ? "#1565C0"
-        : "#448AFF",
+        : "#015c30",
     color: "white",
     cursor: "pointer",
     borderRadius: "10px"

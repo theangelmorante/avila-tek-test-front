@@ -26,7 +26,7 @@ const TravelerFields: React.FC<TravelerFieldsProps> = ({
   documentNumber,
   onChange,
 }) => (
-  <div className="bg-[#448AFF] rounded-xl p-4 mb-4 flex flex-col gap-4 border border-white/10">
+  <div className="bg-[#015c30] rounded-xl p-4 mb-4 flex flex-col gap-4 border border-white/10">
     <h3 className="text-white font-bold text-lg mb-2">Viajero {index + 1}</h3>
     <Input
       label="Nombre completo"
