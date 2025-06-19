@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✈️ Flight Booking Wizard
 
-## Getting Started
+A modern and elegant flight booking wizard built with Next.js 14, TypeScript, and Tailwind CSS. The project implements a multi-step form for flight reservations, featuring real-time validation and a smooth user experience.
 
-First, run the development server:
+[Live Demo](https://avila-tek-test-front.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🏗️ Architecture
+
+The project is structured following Atomic Design principles:
+
+```
+src/
+  ├── components/
+  │   ├── atoms/        # Base components (Button, Input, Select, etc.)
+  │   ├── molecules/    # Combinations of atoms (DateRangePicker, FlightClassSelect)
+  │   ├── organisms/    # Complete sections (TravelInfoForm, TravelersForm)
+  │   └── templates/    # Page layouts and structures
+  ├── app/             # Next.js pages and routes
+  └── types/           # TypeScript definitions
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Core Technologies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js 14**: React framework with App Router and Server Components
+- **TypeScript**: Static typing for better maintainability
+- **Tailwind CSS**: CSS utilities for modern and responsive design
+- **React Hook Form**: Efficient form handling with validation
+- **React Use Wizard**: Step navigation control for the wizard
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Features
 
-## Learn More
+- Multi-step form with real-time validation
+- Responsive and mobile-first design
+- Destination selection with autocomplete
+- Custom date picker
+- Traveler, pet, and luggage management
+- Automatic cost calculation
+- Detailed booking summary
+- Beautiful UI with smooth transitions
+- Form state persistence between steps
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+git clone <repository-url>
+cd avila-tek-test-front
+```
 
-## Deploy on Vercel
+2. Install dependencies:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+yarn install
+# or
+npm install
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. Start the development server:
+
+```bash
+yarn dev
+# or
+npm run dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🌐 Demo
+
+Check out the live demo at:
+[https://avila-tek-test-front.vercel.app/](https://avila-tek-test-front.vercel.app/)
+
+## 👨‍💻 Author
+
+**Angel Morante**
+
+- Email: morante413@gmail.com
+- Portfolio: [https://bento.me/angel-morante](https://bento.me/angel-morante)
+
+## 📄 License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
