@@ -24,6 +24,7 @@ const DestinationAutocomplete: React.FC<DestinationAutocompleteProps> = ({ value
       isLoading={loading}
       placeholder="Selecciona un destino..."
       isClearable
+      className='text-white'
     />
   );
 };

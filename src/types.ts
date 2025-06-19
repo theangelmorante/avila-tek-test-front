@@ -1,5 +1,3 @@
-// Tipos globales para el wizard
-
 export interface Option {
   value: string;
   label: string;

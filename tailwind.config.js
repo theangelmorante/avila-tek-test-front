@@ -15,10 +15,10 @@ module.exports = {
           button: "#212121",
         },
         secondary: {
-          DEFAULT: "#f1f5f9", // gris claro
+          DEFAULT: "#f1f5f9",
           dark: "#64748b",
         },
-        accent: "#f59e42", // naranja/acento
+        accent: "#f59e42",
       },
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui"],
@@ -29,7 +29,7 @@ module.exports = {
       },
     },
     screens: {
-      xs: "375px", // Móviles pequeños
+      xs: "375px",
       sm: "640px",
       md: "768px",
       lg: "1024px",

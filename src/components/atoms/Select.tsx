@@ -31,6 +31,7 @@ const customStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     minHeight: "3.25rem",
     paddingLeft: "0.5rem",
     fontSize: "1.125rem",
+    color: "white"
   }),
   placeholder: (provided: CSSObjectWithLabel) => ({
     ...provided,
@@ -59,6 +60,10 @@ const customStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     color: "white",
     cursor: "pointer",
     borderRadius: "10px"
+  }),
+  input: (provided: CSSObjectWithLabel) => ({
+    ...provided,
+    color: "white",
   }),
 };
 
