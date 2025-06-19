@@ -5,6 +5,8 @@ import { useWizard } from 'react-use-wizard';
 const stepsLabels = [
   'Viaje',
   'Viajeros',
+  'Servicios',
+  'Resumen'
 ];
 
 interface HeaderWizardProps {

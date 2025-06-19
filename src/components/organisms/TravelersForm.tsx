@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TravelerFields from '../molecules/TravelerFields';
 import Input from '../atoms/Input';
-import Button from '../atoms/Button';
+import { useWizard } from 'react-use-wizard';
 
 interface Traveler {
   name: string;
@@ -29,6 +29,8 @@ type TravelerField = 'name' | 'birthDate' | 'documentType' | 'documentNumber';
 type TravelerFieldValue = string | Date | { value: string; label: string } | null;
 
 const TravelersForm: React.FC<TravelersFormProps> = ({ onSubmit, initialValues }) => {
+  const { goToStep } = useWizard();
+
   const [numTravelers, setNumTravelers] = useState(initialValues?.travelers?.length ?? 1);
   const [travelers, setTravelers] = useState<Traveler[]>(initialValues?.travelers ?? [
     { name: '', birthDate: null, documentType: null, documentNumber: '' },
@@ -74,6 +76,7 @@ const TravelersForm: React.FC<TravelersFormProps> = ({ onSubmit, initialValues }
     setTouched(true);
     if (!isValid) return;
     onSubmit({ travelers, pets: hasPets ? pets : 0, extraBags: hasBags ? extraBags : 0 });
+    goToStep(2)
   };
 
   return (
@@ -152,7 +155,6 @@ const TravelersForm: React.FC<TravelersFormProps> = ({ onSubmit, initialValues }
       {touched && !isValid && (
         <div className="text-red-200 text-sm">Por favor, completa todos los datos de los viajeros.</div>
       )}
-      <Button type="submit" className="mt-4">Siguiente</Button>
     </form>
   );
 };

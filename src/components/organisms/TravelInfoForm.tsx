@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import DestinationAutocomplete from '../molecules/DestinationAutocomplete';
 import FlightClassSelect from '../molecules/FlightClassSelect';
 import DateRangeFields from '../molecules/DateRangeFields';
-import Button from '../atoms/Button';
 import { Option } from '../atoms/Select';
 import { useWizard } from 'react-use-wizard';
 
@@ -35,17 +34,9 @@ const TravelInfoForm: React.FC<TravelInfoFormProps> = ({ onSubmit, initialValues
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('VEaMOS: ', e)
     setTouched(true);
 
     if (!isValid) return;
-    console.log('IS VALID: ', isValid)
-    console.log("DATA: ", {
-      destination: destination!,
-      departureDate: departureDate!,
-      returnDate: returnDate!,
-      flightClass: flightClass!,
-    })
     onSubmit({
       destination: destination!,
       departureDate: departureDate!,
@@ -76,9 +67,6 @@ const TravelInfoForm: React.FC<TravelInfoFormProps> = ({ onSubmit, initialValues
       {touched && !isValid && (
         <div className="text-red-500 text-sm">Por favor, completa todos los campos correctamente.</div>
       )}
-      <Button type="submit" variant="primary" disabled={!isValid}>
-        Siguiente
-      </Button>
     </form>
   );
 };
